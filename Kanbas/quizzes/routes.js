@@ -31,10 +31,24 @@ function QuizRoutes(app) {
     res.json(status);
   };
 
+  const publishQuiz = async (req, res) => {
+    const { qid } = req.params;
+    const status = await dao.publishQuiz(qid);
+    res.json(status);
+  };
+
+  const unpublishQuiz = async (req, res) => {
+    const { qid } = req.params;
+    const status = await dao.unpublishQuiz(qid);
+    res.json(status);
+  };
+
   app.put("/api/quizzes/:qid", updateQuiz);
   app.delete("/api/quizzes/:qid", deleteQuiz);
   app.post("/api/courses/:cid/quizzes", createQuiz);
   app.get("/api/courses/:cid/quizzes", findAllQuizzesByCourse);
   app.get("/api/quizzes/:qid", findQuizById);
+  app.get("/api/quizzes/:qid/publish", publishQuiz);
+  app.get("/api/quizzes/:qid/unpublish", unpublishQuiz);
 }
 export default QuizRoutes;

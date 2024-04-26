@@ -1,14 +1,5 @@
 import mongoose from "mongoose";
 
-
-const questionSchema = new mongoose.Schema({
-    type: {type: String, default: "Multiple Choice", enum: ["Multiple Choice", "True/False", "Fill-in-the-Blank"]},
-    correctAnswers: [String],
-    wrongAnswers: [String],
-    question: {type: String, required: true},
-    points: {type: Number, default: 1}
-});
-
 const quizSchema = new mongoose.Schema({
     course: { type: String, required: true },
     published: Boolean,
@@ -36,11 +27,7 @@ const quizSchema = new mongoose.Schema({
     lockQuestions: {type: String, default: "No"},
     multipleAttempts: {type: String, default: "No"},
     shuffle: {type: String, default: "Yes"},
-    questions: questionSchema,
-    role: {
-      type: String,
-      enum: ["STUDENT", "FACULTY", "ADMIN", "USER"],
-      default: "USER",},
+    useTimeLimit: {type: String, default: "Yes"}
   },
   { collection: "quizzes" });
 export default quizSchema;
